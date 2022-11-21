@@ -17,3 +17,4 @@ class Character:
 
     def setY(self, y: int) -> None:
         self.__y = y
+

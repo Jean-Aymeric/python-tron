@@ -29,3 +29,10 @@ class Model(IModel):
 
     def getSquareByXY(self, x: int, y: int) -> Square:
         return self.__grid[y][x]
+
+    def getCharacterXY(self) -> int:
+        return self.__character.getX(), self.__character.getY()
+
+    def setCharacterXY(self, x: int, y: int):
+        self.__character.setX(x)
+        self.__character.setY(y)

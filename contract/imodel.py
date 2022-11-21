@@ -11,3 +11,11 @@ class IModel(ABC):
     @abstractmethod
     def getSquareByXY(self, x: int, y: int) -> Square:
         ...
+
+    @abstractmethod
+    def getCharacterXY(self) -> int:
+        ...
+
+    @abstractmethod
+    def setCharacterXY(self, x: int, y: int):
+        ...

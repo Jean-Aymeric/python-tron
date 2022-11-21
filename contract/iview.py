@@ -20,3 +20,6 @@ class IView(ABC):
     def showGrid(self):
         ...
 
+    @abstractmethod
+    def setController(self, controller) -> None:
+        ...
