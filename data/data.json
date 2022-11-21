@@ -1,0 +1,10 @@
+{
+  "title": "Un super titre pour mon appli qui déchire",
+  "height": 50,
+  "width": 50,
+  "zoom": 16,
+  "background": "#000000",
+  "color": "#00FF00",
+  "startX": 1,
+  "startY": 2
+}
