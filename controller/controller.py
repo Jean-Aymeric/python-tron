@@ -1,7 +1,5 @@
-import random
-from time import sleep
-
 from contract.action import Action
+from contract.direction import Direction
 from contract.icontroller import IController
 from contract.imodel import IModel
 from contract.iview import IView
@@ -31,6 +29,7 @@ class Controller(IController):
 
     def __gameLoop(self):
         while self.__running:
+            self.__model.moveMobile()
             self.__view.showGrid()
 
     def performAction(self, action: Action):
@@ -38,11 +37,12 @@ class Controller(IController):
         if action == Action.CLOSE:
             self.__running = False
         elif action == Action.UP:
-            newY = (newY - 1 + self.__model.getFromKey("height")) % self.__model.getFromKey("height")
+            self.__model.setCharacterDirection(Direction.NORTH)
         elif action == Action.DOWN:
-            newY = (newY + 1 + self.__model.getFromKey("height")) % self.__model.getFromKey("height")
+            self.__model.setCharacterDirection(Direction.SOUTH)
         elif action == Action.LEFT:
-            newX = (newX - 1 + self.__model.getFromKey("width")) % self.__model.getFromKey("width")
+            self.__model.setCharacterDirection(Direction.WEST)
         elif action == Action.RIGHT:
-            newX = (newX + 1 + self.__model.getFromKey("width")) % self.__model.getFromKey("width")
-        self.__model.setCharacterXY(newX, newY)
+            self.__model.setCharacterDirection(Direction.EAST)
+        elif action == Action.STOP:
+            self.__model.setCharacterDirection(Direction.MIDDLE)

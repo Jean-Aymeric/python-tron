@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+from contract.direction import Direction
 from contract.square import Square
 
 
@@ -19,3 +20,11 @@ class IModel(ABC):
     @abstractmethod
     def setCharacterXY(self, x: int, y: int):
         ...
+
+    @abstractmethod
+    def setCharacterDirection(self, direction: Direction):
+        pass
+
+    @abstractmethod
+    def moveMobile(self):
+        pass

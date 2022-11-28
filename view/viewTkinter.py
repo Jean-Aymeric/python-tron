@@ -40,6 +40,8 @@ class ViewTkinter(IView):
             self.__controller.performAction(Action.LEFT)
         elif event.keysym == "Right":
             self.__controller.performAction(Action.RIGHT)
+        elif event.keysym == "space":
+            self.__controller.performAction(Action.STOP)
 
     def __onClosing(self):
         self.__controller.performAction(Action.CLOSE)
@@ -65,6 +67,14 @@ class ViewTkinter(IView):
                                                        (x+1)*zoom,
                                                        (y+1)*zoom,
                                                        outline=self.__model.getFromKey("color"))
+                    elif self.__model.getSquareByXY(x, y) == Square.WALL:
+                        self.__canvas.create_rectangle(x*zoom,
+                                                       y*zoom,
+                                                       (x+1)*zoom,
+                                                       (y+1)*zoom,
+                                                       outline=self.__model.getFromKey("color"),
+                                                       fill=self.__model.getFromKey("color"))
+
             xCharacter, yCharacter = self.__model.getCharacterXY()
             # image = ImageTk.PhotoImage(Image.open("JADT.jpg"))
             # self.__character = self.__canvas.create_image(xCharacter*zoom,
@@ -82,13 +92,17 @@ class ViewTkinter(IView):
             for i in range(zoom//2):
                 newX = self.__canvas.coords(self.__character)[0]
                 newY = self.__canvas.coords(self.__character)[1]
+                if ((abs(newX - xCharacter*zoom)) > zoom) or ((abs(newY - yCharacter*zoom)) > zoom):
+                    newX = xCharacter * zoom
+                    newY = yCharacter * zoom
                 if newX != (xCharacter * zoom):
                     newX += 2*((newX > (xCharacter * zoom)) * (-1) + (newX < (xCharacter * zoom)))
                 if newY != (yCharacter * zoom):
                     newY += 2*((newY > (yCharacter * zoom)) * (-1) + (newY < (yCharacter * zoom)))
                 self.__canvas.coords(self.__character, newX, newY, (newX+zoom), (newY+zoom))
                 self.__window.update()
-                sleep(0.01)
+                sleep(0.001)
         self.__window.update()
+
     def setController(self, controller) -> None:
         self.__controller = controller
